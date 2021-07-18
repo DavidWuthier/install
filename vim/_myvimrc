@@ -1,0 +1,116 @@
+
+" Enable filetype plugin and indent
+filetype plugin indent on
+" Set language to english.
+let $LANG='en'
+" Display line number.
+set number
+" Set font type and size.
+if has("win32")
+	set guifont=Consolas:h14:cANSI
+elseif has("unix")
+	set guifont=Droid\ sans\ mono\ 14
+endif
+" Set color sheme
+colorscheme molokai
+" Use original Monokai theme.
+let g:molokai_original = 0
+" Disable toolbar
+set guioptions-=T
+" Set tab options
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" Use Arduino syntax.
+autocmd BufNewFile,BufRead *.ino setlocal filetype=cpp
+" Consider .launch as xml
+autocmd BufNewFile,BufRead *.launch setlocal filetype=xml
+" Consider .world as xml
+autocmd BufNewFile,BufRead *.world setlocal filetype=xml
+" Scrolling key mappings.
+nnoremap J <C-D>M
+nnoremap K <C-U>M
+" Update file
+set autoread
+" Find key mappings
+nnoremap n nzz
+nnoremap N Nzz
+" Highlight search
+set hlsearch
+" Show commands as they are displayed
+set showcmd
+" Show tabs and trailing spaces
+set listchars=tab:\|\ ,trail:·
+set list
+" The shortcuts no one can live without...
+vnoremap <C-C> "+y
+nnoremap <C-V> "+p
+" Use the hidden option
+set hidden
+" Life enhancements
+nnoremap <F8> :e $VIM_DROPBOX_PATH/_myvimrc<CR>
+nnoremap <F9> :so $VIM_DROPBOX_PATH/_myvimrc<CR>
+" FuzzyFinder shorcuts
+nnoremap <C-J> :FufBuffer<CR>
+nnoremap <C-F> :FufLine<CR>
+" Use appropriate syntax with some bash files
+autocmd BufNewFile,BufRead *.bash_aliases setlocal filetype=sh
+autocmd BufNewFile,BufRead *.bash_custom setlocal filetype=sh
+" Toggle tag list
+nnoremap <C-K> :TlistToggle<CR>
+" Add eigen3 to tags
+set tags+=/usr/include/eigen3/tags
+" Add ros/include to tags
+set tags+=/opt/ros/indigo/include
+" Add ~/catkin_ws to tags
+set tags+=$HOME/catkin_ws/tags
+" YCM go to definition
+nnoremap <C-H> :YcmCompleter GoTo<CR>
+
+" Use the ultisnip plugin
+set runtimepath+=$VIM_DROPBOX_PATH/plugins/YouCompleteMe
+set runtimepath+=$VIM_DROPBOX_PATH/plugins/ultisnips
+set runtimepath+=$VIM_DROPBOX_PATH/plugins/vim-snippets
+set runtimepath+=$VIM_DROPBOX_PATH/plugins/vim-abolish
+"set runtimepath+=$VIM_DROPBOX_PATH/plugins/vim-latex
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" Taglist window width
+let Tlist_WinWidth=80
+" global ycm_extra_conf
+let g:ycm_global_ycm_extra_conf='$VIM_DROPBOX_PATH'
+" Maximize GVim on start
+if has("gui_running")
+  set lines=999 columns=999
+endif
+" Aliases for opening buffer in vertical split.
+command! -nargs=1 Vs vert sb <args>
+command! -nargs=1 Vsr vert belowright sb <args>
+command! -nargs=1 -range=% Sub %s/<args>/gcI
+" Go to (using ctags)
+nnoremap <C-L> <C-]>
+" Join to previous line
+nnoremap <C-M> J
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+"set grepprg=grep\ -nH\ $*
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+"let g:tex_flavor='latex'
+" Amazing for LaTeX-ing!
+nnoremap \l :w<CR> :! pdflatex main<CR>
+nnoremap \b :! bibtex main<CR>
+" Minimap
+com Zm set guifont=Droid\ sans\ mono\ 4
+com Zn set guifont=Droid\ sans\ mono\ 14
+" Alternating
+nnoremap <C-A> :A<CR>
+" Fixing text
+nnoremap <c-u> gggqG

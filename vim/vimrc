@@ -1,0 +1,227 @@
+" An example for a vimrc file.
+"
+" Maintainer:	Bram Moolenaar <Bram@vim.org>
+" Last change:	2016 Jul 28
+"
+" To use it, copy it to
+"     for Unix and OS/2:  ~/.vimrc
+"	      for Amiga:  s:.vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
+"	    for OpenVMS:  sys$login:.vimrc
+
+" required
+filetype off
+set nocp
+
+" set the runtime path to include Vundle and initialize
+set rtp+=$HOME/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'L9'
+Plugin 'vim-scripts/FuzzyFinder'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'dantler/vim-alternate'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+"Plugin 'lervag/vimtex'
+"Plugin 'ctrlpvim/ctrlp.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+"Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
+endif
+
+" Get the defaults that most users want.
+source $HOME/install/vim/defaults.vim
+
+"if has("vms")
+  "set nobackup		" do not keep a backup file, use versions instead
+"else
+  "set backup		" keep a backup file (restore to previous version)
+  "if has('persistent_undo')
+    "set undofile	" keep an undo file (undo changes after closing)
+  "endif
+"endif
+
+if &t_Co > 2 || has("gui_running")
+  " Switch on highlighting the last used search pattern.
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+  " Autoindent text files
+  autocmd FileType text set autoindent
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" Add optional packages.
+"
+" The matchit plugin makes the % command work better, but it is not backwards
+" compatible.
+if has('syntax') && has('eval')
+  packadd matchit
+endif
+
+" Set fonts
+set guifont=Hack\ 16
+
+" Disable toolbars
+:set guioptions-=m  "remove menu bar
+:set guioptions-=T  "remove toolbar
+:set guioptions-=r  "remove right-hand scroll bar
+:set guioptions-=L  "remove left-hand scroll bar
+
+" Set color sheme
+colorscheme monokai
+hi Pmenu ctermfg=None ctermbg=239 cterm=NONE guifg=NONE guibg=gray30 gui=NONE
+"colorscheme molokai
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+"hi Normal ctermbg=NONE
+
+" Show tabs and trailing spaces
+set listchars=tab:\|\ ,trail:· list
+
+" Life enhancements
+nnoremap <F8> :e $HOME/install/vim/vimrc<CR>
+nnoremap <F9> :so $HOME/install/vim/vimrc<CR>
+
+" Set tab options
+set tabstop=2 expandtab softtabstop=2 shiftwidth=2
+autocmd Filetype python setlocal tabstop=2 expandtab softtabstop=2 shiftwidth=2
+
+" Use the hidden option
+set hidden
+" Update file
+set autoread
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap \gg :YcmCompleter GoTo<CR>
+nnoremap \gi :YcmCompleter GoToInclude<CR>
+nnoremap \gf :YcmCompleter GoToDefinition<CR>
+nnoremap \gc :YcmCompleter GoToDeclaration<CR>
+let g:ycm_auto_trigger = 1
+let g:ycm_auto_hover = ''
+nmap \d <plug>(YCMHover)
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-h>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+
+" nerdcommenter
+let g:NERDCustomDelimiters = {
+  \ 'python': { 'left': '#', 'leftAlt': '# ' },
+\ }
+
+" Display line number
+set number
+
+" Buffers
+
+" CtrlP
+"let g:ctrlp_map = '<c-f>'
+"let g:ctrlp_cmd = 'CtrlP'
+nnoremap <C-J> :FufBuffer<CR>
+
+" Consider .ino as C++
+autocmd BufNewFile,BufRead *.ino setlocal filetype=cpp
+" Consider .launch as xml
+autocmd BufNewFile,BufRead *.launch setlocal filetype=xml
+" Consider .world as xml
+autocmd BufNewFile,BufRead *.world setlocal filetype=xml
+" Consider .gv as dot
+autocmd BufNewFile,BufRead *.gv setlocal filetype=dot smartindent noexpandtab
+" Consider .pl as logtalk
+autocmd BufNewFile,BufRead *.pl setlocal filetype=logtalk tabstop=2 expandtab softtabstop=2 shiftwidth=2
+
+
+" Display Tagbar
+nnoremap <C-k> :TagbarOpenAutoClose<CR>
+let g:tagbar_width=80
+
+" Clear highlighting
+nnoremap <C-l> :noh<CR>
+
+" Alternate
+nnoremap <C-s> :A<CR>
+
+" ctags
+set tags=/home/david/ws/tags
+
+" nerdtree
+nnoremap <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=60
+
+" LaTeX
+autocmd BufNewFile,BufRead *.tex setlocal spell spelllang=en_us
+autocmd BufNewFile,BufRead *.tex setlocal lbr
+autocmd BufNewFile,BufRead *.tex setlocal shiftwidth=0
+autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
+
+" Build command
+nnoremap <C-b> :w<CR> :! make > /dev/pts/0<CR><CR>
+nnoremap \b :w<CR> :! make all > /dev/pts/0<CR><CR>
+
+" Minimap
+com Map set guifont=Hack\ 4
+com NoMap set guifont=Hack\ 12
+
+" Substitution
+com Sub so sub.vim
+
+" vimtex
+let g:vimtex_fold_enabled=1
+
+set nowrap

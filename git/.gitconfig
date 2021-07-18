@@ -1,0 +1,18 @@
+[user]
+	email = dwuthier@gmail.com
+	name = DavidWuthier
+[push]
+	default = simple
+[core]
+	editor = vim
+[alias]
+	st = status
+	co = commit
+	ps = push
+	pl = pull
+	ch = checkout
+	df = diff
+	lg = log
+	me = merge
+	br = branch -vv
+	re = remote -vv

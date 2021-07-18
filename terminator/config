@@ -1,0 +1,145 @@
+[global_config]
+  window_state = maximise
+  title_transmit_bg_color = "#888a85"
+  title_receive_fg_color = "#aaaaaa"
+  title_inactive_fg_color = "#aaaaaa"
+  title_inactive_bg_color = "#333333"
+  title_use_system_font = False
+  title_font = Teko 18
+[keybindings]
+  zoom_in = <Primary>period
+  zoom_out = <Primary>comma
+  zoom_normal = <Primary>equal
+  new_tab = <Alt>p
+  go_next = None
+  go_prev = None
+  go_up = <Alt>k
+  go_down = <Alt>j
+  go_left = <Alt>h
+  go_right = <Alt>l
+  split_horiz = <Alt>o
+  split_vert = <Alt>i
+  close_term = <Alt>u
+  close_window = None
+  resize_up = <Primary><Shift>k
+  resize_down = <Primary><Shift>j
+  resize_left = <Primary><Shift>h
+  resize_right = <Primary><Shift>l
+  move_tab_right = <Alt>m
+  move_tab_left = <Alt>n
+  next_tab = <Primary><Shift>m
+  prev_tab = <Primary><Shift>n
+  switch_to_tab_1 = <Primary>1
+  switch_to_tab_2 = <Primary>2
+  switch_to_tab_3 = <Primary>3
+  switch_to_tab_4 = <Primary>4
+  switch_to_tab_5 = <Primary>5
+  switch_to_tab_6 = <Primary>6
+  switch_to_tab_7 = <Primary>7
+  switch_to_tab_8 = <Primary>8
+  switch_to_tab_9 = <Primary>9
+  switch_to_tab_10 = <Primary>0
+  full_screen = <Alt>f
+  hide_window = None
+  group_all = None
+  ungroup_all = None
+  group_tab = None
+  ungroup_tab = None
+  new_window = None
+  new_terminator = None
+  broadcast_off = None
+  broadcast_group = None
+  broadcast_all = None
+  insert_number = None
+  insert_padded = None
+  edit_window_title = <Alt>d
+  layout_launcher = None
+[profiles]
+  [[default]]
+    icon_bell = False
+    background_darkness = 0.77
+    background_type = transparent
+    cursor_shape = ibeam
+    cursor_color = "#aaaaaa"
+    font = Hack 16
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#000000:#f92672:#6cc72c:#fe9720:#5f91ef:#9358fe:#36af90:#8c8c8c:#4c4c4c:#ff80f4:#a7e22e:#ffee99:#5fd9ef:#ae82fe:#66efd5:#c7cece"
+    use_system_font = False
+  [[ros]]
+    icon_bell = False
+    background_darkness = 0.77
+    background_type = transparent
+    cursor_shape = ibeam
+    cursor_color = "#aaaaaa"
+    font = Hack 8
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#000000:#f92672:#6cc72c:#fe9720:#5f91ef:#9358fe:#36af90:#8c8c8c:#4c4c4c:#ff80f4:#a7e22e:#ffee99:#5fd9ef:#ae82fe:#66efd5:#c7cece"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+  [[ros]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 72:27
+      maximised = True
+      fullscreen = False
+      size = 1848, 1016
+      title = david@p50: ~
+      last_active_term = 7658a8a8-18cb-4734-8ceb-6317b4395604
+      last_active_window = True
+    [[[child1]]]
+      type = HPaned
+      parent = child0
+      order = 0
+      position = 922
+      ratio = 0.5002712967986978
+    [[[child2]]]
+      type = HPaned
+      parent = child1
+      order = 0
+      position = 458
+      ratio = 0.4994547437295529
+    [[[terminal3]]]
+      type = Terminal
+      parent = child2
+      order = 0
+      profile = default
+      uuid = 44e61e96-96f0-45d9-901b-a8c3b708eb61
+    [[[terminal4]]]
+      type = Terminal
+      parent = child2
+      order = 1
+      profile = default
+      uuid = 7658a8a8-18cb-4734-8ceb-6317b4395604
+    [[[child5]]]
+      type = HPaned
+      parent = child1
+      order = 1
+      position = 460
+      ratio = 0.5
+    [[[terminal6]]]
+      type = Terminal
+      parent = child5
+      order = 0
+      profile = default
+      uuid = 9c07bb40-5ecb-4878-9589-32d8a5780740
+    [[[terminal7]]]
+      type = Terminal
+      parent = child5
+      order = 1
+      profile = default
+      uuid = 88f7cb02-7c41-4268-8398-d22ee29b6163
+[plugins]
